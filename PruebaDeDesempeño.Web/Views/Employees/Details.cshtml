@@ -1,0 +1,180 @@
+@model PruebaDeDesempeño.Web.ViewModels.EmployeeViewModel
+@{
+    ViewData["Title"] = "Detalles del Empleado";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-person-badge me-2"></i>
+                    Detalles del Empleado
+                </h5>
+                <div class="d-flex gap-2">
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-arrow-left me-2"></i>
+                        Volver
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">
+                        <i class="bi bi-pencil me-2"></i>
+                        Editar
+                    </a>
+                    <a asp-action="DownloadCv" asp-route-id="@Model.Id" class="btn btn-info btn-sm text-white">
+                        <i class="bi bi-file-earmark-pdf me-2"></i>
+                        Descargar HV
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-2 text-center">
+                        <div class="avatar-circle-lg mx-auto mb-3">
+                            @Model.FullName.Substring(0, 1)
+                        </div>
+                        <span class="badge bg-success">@Model.Status</span>
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mb-1">@Model.FullName</h3>
+                        <p class="text-muted mb-2">@Model.Position</p>
+                        <div class="d-flex gap-3 text-muted small">
+                            <span>
+                                <i class="bi bi-envelope me-1"></i> @Model.Email
+                            </span>
+                            <span>
+                                <i class="bi bi-telephone me-1"></i> @Model.Phone
+                            </span>
+                            <span>
+                                <i class="bi bi-geo-alt me-1"></i> @Model.Address
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="info-card h-100">
+                            <h6 class="info-card-title">Información Personal</h6>
+                            <dl class="info-list">
+                                <div class="info-row">
+                                    <dt>Documento</dt>
+                                    <dd>@Model.DocumentType @Model.DocumentNumber</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Fecha Nacimiento</dt>
+                                    <dd>@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("dd/MM/yyyy") : "No registrada")</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Género</dt>
+                                    <dd>@Model.Gender</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-card h-100">
+                            <h6 class="info-card-title">Información Laboral</h6>
+                            <dl class="info-list">
+                                <div class="info-row">
+                                    <dt>Departamento</dt>
+                                    <dd>@Model.DepartmentName</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Cargo</dt>
+                                    <dd>@Model.Position</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Salario</dt>
+                                    <dd>@string.Format("{0:C0}", Model.Salary)</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Fecha Ingreso</dt>
+                                    <dd>@Model.HireDate.ToString("dd/MM/yyyy")</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="info-card">
+                            <h6 class="info-card-title">Perfil Profesional</h6>
+                            <dl class="info-list">
+                                <div class="info-row">
+                                    <dt>Nivel Educativo</dt>
+                                    <dd>@Model.EducationLevel</dd>
+                                </div>
+                                <div class="info-row">
+                                    <dt>Perfil</dt>
+                                    <dd>@Model.ProfessionalProfile</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .avatar-circle-lg {
+        width: 80px;
+        height: 80px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    .info-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+    }
+
+    .info-card-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-light);
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .info-list {
+        margin: 0;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-row dt {
+        flex: 0 0 40%;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .info-row dd {
+        flex: 0 0 60%;
+        margin: 0;
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+</style>
+

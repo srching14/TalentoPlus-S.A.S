@@ -1,0 +1,119 @@
+@model PruebaDeDesempeño.Web.ViewModels.ClientProfileViewModel
+@{
+    ViewData["Title"] = "Editar Perfil";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Header -->
+        <div class="d-flex align-items-center gap-3 mb-4">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div>
+                <h2 class="mb-0" style="color: var(--text-primary);">Editar Perfil</h2>
+                <p class="mb-0" style="color: var(--text-muted);">Actualiza tu información personal</p>
+            </div>
+        </div>
+
+        <form asp-action="EditProfile" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4" style="display: @(ViewData.ModelState.ErrorCount > 0 ? "block" : "none")"></div>
+
+            <!-- Personal Info Card -->
+            <div class="card mb-4" style="background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1);">
+                <div class="card-header d-flex align-items-center gap-2" style="background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <i class="bi bi-person-vcard" style="color: var(--primary-light);"></i>
+                    <span style="color: var(--text-primary);">Información Personal</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input asp-for="FullName" class="form-control" placeholder="Tu nombre completo"/>
+                        </div>
+                        <span asp-validation-for="FullName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input asp-for="Email" class="form-control" placeholder="correo@ejemplo.com"/>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                        <small class="text-muted">Si cambias tu correo, deberás iniciar sesión nuevamente.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Change Card -->
+            <div class="card mb-4" style="background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1);">
+                <div class="card-header d-flex align-items-center gap-2" style="background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <i class="bi bi-shield-lock" style="color: var(--warning);"></i>
+                    <span style="color: var(--text-primary);">Cambiar Contraseña</span>
+                    <span class="badge bg-secondary ms-auto">Opcional</span>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3" style="color: var(--text-muted);">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Deja estos campos vacíos si no deseas cambiar tu contraseña.
+                    </p>
+
+                    <div class="mb-3">
+                        <label asp-for="CurrentPassword" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-key"></i>
+                            </span>
+                            <input asp-for="CurrentPassword" class="form-control" placeholder="Tu contraseña actual"/>
+                        </div>
+                        <span asp-validation-for="CurrentPassword" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NewPassword" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock"></i>
+                                </span>
+                                <input asp-for="NewPassword" class="form-control" placeholder="Nueva contraseña"/>
+                            </div>
+                            <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ConfirmNewPassword" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+                                <input asp-for="ConfirmNewPassword" class="form-control" placeholder="Confirmar contraseña"/>
+                            </div>
+                            <span asp-validation-for="ConfirmNewPassword" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3 justify-content-end">
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-x-lg me-1"></i> Cancelar
+                </a>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-check-lg me-1"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

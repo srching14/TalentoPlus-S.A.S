@@ -1,0 +1,80 @@
+# Docker Compose para TalentoPlus S.A.S.
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: pruebadedesempeno_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Qwe.123
+      POSTGRES_DB: pruebadedesempeno_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Aplicación Web MVC
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pruebadedesempeno_web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pruebadedesempeno_db;Username=postgres;Password=Qwe.123
+      - EmailSettings__SmtpServer=sandbox.smtp.mailtrap.io
+      - EmailSettings__SmtpPort=2525
+      - EmailSettings__SenderEmail=noreply@pruebadesempeno.com
+      - EmailSettings__SenderName=Sistema Prueba de Desempeño
+      - EmailSettings__Username=45c32d48bac825
+      - EmailSettings__Password=ecb729df6118f586e189bfe5a4f5b293
+      - Jwt__Key=SuperSecretKeyForJWTAuthenticationPruebaDeDesempeno2024!
+      - Jwt__Issuer=PruebaDeDesempenoAPI
+      - Jwt__Audience=PruebaDeDesempenoClient
+    ports:
+      - "5000:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # API REST
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: pruebadedesempeno_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pruebadedesempeno_db;Username=postgres;Password=Qwe.123
+      - Jwt__Key=SuperSecretKeyForJWTAuthenticationPruebaDeDesempeno2024!
+      - Jwt__Issuer=PruebaDeDesempenoAPI
+      - Jwt__Audience=PruebaDeDesempenoClient
+    ports:
+      - "5001:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

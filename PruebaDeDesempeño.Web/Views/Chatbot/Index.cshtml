@@ -1,0 +1,151 @@
+@{
+    ViewData["Title"] = "Asistente Virtual";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="chat-container">
+    <div class="chat-header">
+        <div class="d-flex align-items-center gap-3">
+            <div class="chat-bot-avatar">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div>
+                <h5 class="mb-0">Asistente Virtual</h5>
+                <small class="text-muted">Pregúntame sobre empleados y departamentos</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+            <div class="message-avatar">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div class="message-content">
+                <p> ¡Hola! Soy tu asistente virtual con IA. Puedo ayudarte con información sobre:</p>
+                <ul class="mb-0">
+                    <li> Empleados por cargo o posición</li>
+                    <li> Empleados por departamento</li>
+                    <li> Estados (Activo, Inactivo, Vacaciones)</li>
+                    <li> Estadísticas salariales</li>
+                    <li> Contrataciones recientes</li>
+                </ul>
+                <p class="mb-0 mt-2">
+                    <strong>¿En qué puedo ayudarte?</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <form id="chatForm" class="d-flex gap-2">
+            <input type="text" id="messageInput" class="form-control" placeholder="Escribe tu pregunta..." autocomplete="off">
+            <button type="submit" class="btn btn-primary" id="sendButton">
+                <i class="bi bi-send"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+
+    // Función para agregar mensaje al chat
+    function addMessage(message, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+
+        if (!isUser) {
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = '<i class="bi bi-robot"></i>';
+            messageDiv.appendChild(avatar);
+        }
+
+        const content = document.createElement('div');
+        content.className = 'message-content';
+        
+        // Convertir markdown básico a HTML
+        let htmlMessage = message
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br>');
+        
+        content.innerHTML = htmlMessage;
+        messageDiv.appendChild(content);
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Función para enviar mensaje
+    async function sendMessage(message) {
+        if (!message.trim()) return;
+
+        // Agregar mensaje del usuario
+        addMessage(message, true);
+        messageInput.value = '';
+        sendButton.disabled = true;
+
+        // Mostrar indicador de escritura
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot-message typing-indicator';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="message-avatar">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div class="message-content">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            const response = await fetch('/Chatbot/SendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+            
+            // Remover indicador de escritura
+            typingDiv.remove();
+
+            if (response.ok) {
+                addMessage(data.response, false);
+            } else {
+                addMessage(' Lo siento, ocurrió un error. Por favor intenta nuevamente.', false);
+            }
+        } catch (error) {
+            typingDiv.remove();
+            addMessage(' Error de conexión. Por favor intenta nuevamente.', false);
+            console.error('Error:', error);
+        } finally {
+            sendButton.disabled = false;
+            messageInput.focus();
+        }
+    }
+
+    // Event listener para el formulario
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = messageInput.value;
+        sendMessage(message);
+    });
+
+    // Enfocar el input al cargar
+    messageInput.focus();
+</script>
+}

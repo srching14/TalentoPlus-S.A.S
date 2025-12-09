@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Importar Empleados";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="bi bi-file-earmark-excel me-2"></i>
+                    Importar Empleados
+                </h5>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Volver
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info mb-4">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <strong>Instrucciones:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>El archivo debe ser formato Excel (.xlsx)</li>
+                        <li>La primera fila debe contener los encabezados</li>
+                        <li>Las columnas requeridas son: DocumentNumber, FullName, Email, Position, Department</li>
+                        <li>Si el empleado ya existe (por documento), se actualizará su información</li>
+                    </ul>
+                </div>
+
+                <form asp-action="ImportExcel" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-4">
+                        <label for="file" class="form-label">Seleccionar Archivo Excel</label>
+                        <input type="file" name="file" id="file" class="form-control" accept=".xlsx" required />
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-upload me-2"></i>
+                            Importar Datos
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

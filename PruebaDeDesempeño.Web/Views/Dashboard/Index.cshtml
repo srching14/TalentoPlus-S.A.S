@@ -1,0 +1,217 @@
+@model PruebaDeDesempeño.Web.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- KPI Cards -->
+<div class="kpi-grid">
+    <div class="kpi-card primary">
+        <div class="kpi-icon">
+            <i class="bi bi-people-fill"></i>
+        </div>
+        <div class="kpi-value">@Model.TotalEmployees</div>
+        <div class="kpi-label">Total Empleados</div>
+    </div>
+
+    <div class="kpi-card success">
+        <div class="kpi-icon">
+            <i class="bi bi-person-check"></i>
+        </div>
+        <div class="kpi-value">@Model.ActiveEmployees</div>
+        <div class="kpi-label">Empleados Activos</div>
+    </div>
+
+    <div class="kpi-card warning">
+        <div class="kpi-icon">
+            <i class="bi bi-umbrella"></i>
+        </div>
+        <div class="kpi-value">@Model.EmployeesOnVacation</div>
+        <div class="kpi-label">En Vacaciones</div>
+    </div>
+
+    <div class="kpi-card info">
+        <div class="kpi-icon">
+            <i class="bi bi-currency-dollar"></i>
+        </div>
+        <div class="kpi-value">@Model.AverageSalary.ToString("C0")</div>
+        <div class="kpi-label">Salario Promedio</div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Employees -->
+    <div class="col-lg-7 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="bi bi-clock-history me-2"></i>
+                    Contrataciones Recientes
+                </h5>
+                <a asp-controller="Employees" asp-action="Index" class="btn btn-sm btn-outline-primary">
+                    Ver Todos
+                </a>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.RecentEmployees.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                            <tr>
+                                <th>Empleado</th>
+                                <th>Cargo</th>
+                                <th>Departamento</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var emp in Model.RecentEmployees)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="avatar-circle">
+                                                @emp.FullName.Substring(0, 1)
+                                            </div>
+                                            <span class="fw-medium">@emp.FullName</span>
+                                        </div>
+                                    </td>
+                                    <td>@emp.Position</td>
+                                    <td>@emp.DepartmentName</td>
+                                    <td>@emp.HireDate.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <span class="badge bg-success badge-status">@emp.Status</span>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <p class="empty-state-title">Sin empleados</p>
+                        <p class="empty-state-text">Aún no hay empleados registrados en el sistema.</p>
+                        <a asp-controller="Employees" asp-action="Create" class="btn btn-primary">
+                            <i class="bi bi-plus-lg me-2"></i>
+                            Nuevo Empleado
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Employees by Department -->
+    <div class="col-lg-5 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <i class="bi bi-building me-2"></i>
+                    Empleados por Departamento
+                </h5>
+                <a asp-controller="Departments" asp-action="Index" class="btn btn-sm btn-outline-primary">
+                    Gestionar Áreas
+                </a>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.EmployeesByDepartment.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                            <tr>
+                                <th>Departamento</th>
+                                <th class="text-center">Empleados</th>
+                                <th class="text-end">% Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var dept in Model.EmployeesByDepartment)
+                            {
+                                var percentage = Model.TotalEmployees > 0
+                                    ? (double)dept.Value / Model.TotalEmployees * 100
+                                    : 0;
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="kpi-icon" style="width: 36px; height: 36px; font-size: 1rem; background: rgba(99, 102, 241, 0.15); color: var(--primary-light);">
+                                                <i class="bi bi-building"></i>
+                                            </div>
+                                            <span class="fw-medium">@dept.Key</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">@dept.Value</span>
+                                    </td>
+                                    <td class="text-end fw-semibold">
+                                        @percentage.ToString("F1")%
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="bi bi-building-slash"></i>
+                        </div>
+                        <p class="empty-state-title">Sin datos</p>
+                        <p class="empty-state-text">No hay información de departamentos disponible.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">
+            <i class="bi bi-lightning me-2"></i>
+            Acciones Rápidas
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-3">
+            <a asp-controller="Employees" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-person-plus me-2"></i>
+                Nuevo Empleado
+            </a>
+            <a asp-controller="Departments" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-building-add me-2"></i>
+                Nuevo Departamento
+            </a>
+            <a asp-controller="Employees" asp-action="ImportExcel" class="btn btn-secondary">
+                <i class="bi bi-file-earmark-excel me-2"></i>
+                Importar Excel
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .avatar-circle {
+        width: 36px;
+        height: 36px;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+</style>
