@@ -1,137 +1,137 @@
-# 🚀 TalentoPlus S.A.S. - Sistema de Gestión de Empleados
+# TalentoPlus S.A.S. - Employee Management System
 
-Sistema de gestión de empleados integral desarrollado con **ASP.NET Core 8.0** que incluye aplicación MVC para administración de RRHH, API REST para autoservicio de empleados, dashboard con IA, pruebas automatizadas y soporte completo para Docker.
+A comprehensive employee management system developed with **ASP.NET Core 8.0** that includes an MVC application for HR administration, REST API for employee self-service, AI-powered dashboard, automated tests, and full Docker support.
 
-**🔗 Repositorio:** [https://github.com/srching14/TalentoPlus-S.A.S.git](https://github.com/srching14/TalentoPlus-S.A.S.git)
+**Repository:** [https://github.com/srching14/TalentoPlus-S.A.S.git](https://github.com/srching14/TalentoPlus-S.A.S.git)
 
 ---
 
-## ⚠️ IMPORTANTE - INFORMACIÓN RÁPIDA
+## IMPORTANT - QUICK INFORMATION
 
-### 🔗 Link del Repositorio
+### Repository Link
 ```
 https://github.com/srching14/TalentoPlus-S.A.S.git
 ```
 
-### 🚀 Pasos para Correr la Solución
+### Steps to Run the Solution
 
-**Opción 1: Con Docker (Recomendado)**
+**Option 1: With Docker (Recommended)**
 ```bash
-# 1. Clonar el repositorio
+# 1. Clone the repository
 git clone https://github.com/srching14/TalentoPlus-S.A.S.git
 cd TalentoPlus-S.A.S
 
-# 2. Levantar todos los servicios
+# 2. Start all services
 docker compose up -d
 
-# 3. Acceder a las aplicaciones
+# 3. Access the applications
 # Web (Admin): http://localhost:5000
 # API: http://localhost:5001
 ```
 
-**Opción 2: Desarrollo Local**
+**Option 2: Local Development**
 ```bash
-# 1. Clonar el repositorio
+# 1. Clone the repository
 git clone https://github.com/srching14/TalentoPlus-S.A.S.git
 cd TalentoPlus-S.A.S
 
-# 2. Configurar variables de entorno (copiar .env.example a .env)
+# 2. Configure environment variables (copy .env.example to .env)
 cp .env.example .env
 
-# 3. Ejecutar la aplicación Web
+# 3. Run the Web application
 cd PruebaDeDesempeño.Web
 dotnet run
 
-# 4. (En otra terminal) Ejecutar la API
+# 4. (In another terminal) Run the API
 cd PruebaDeDesempeño.API
 dotnet run
 ```
 
-### ⚙️ Configuración de Variables de Entorno
+### Environment Variables Configuration
 
-Crear archivo `.env` en la raíz del proyecto con:
+Create a `.env` file in the project root with:
 
 ```env
-# Base de datos
+# Database
 CONNECTION_STRING=Host=localhost;Port=5434;Database=pruebadedesempeno_db;Username=postgres;Password=Qwe.123
 
 # JWT
 JWT_KEY=SuperSecretKeyForJWTAuthenticationPruebaDeDesempeno2024!
 
-# Email (Mailtrap para testing)
+# Email (Mailtrap for testing)
 SMTP_SERVER=sandbox.smtp.mailtrap.io
 SMTP_PORT=2525
-SMTP_USERNAME=tu_usuario_mailtrap
-SMTP_PASSWORD=tu_password_mailtrap
+SMTP_USERNAME=your_mailtrap_username
+SMTP_PASSWORD=your_mailtrap_password
 
-# Gemini AI (opcional)
-GEMINI_API_KEY=tu_api_key_aqui
+# Gemini AI (optional)
+GEMINI_API_KEY=your_api_key_here
 ```
 
-### 🔑 Credenciales de Acceso
+### Access Credentials
 
-| Rol | Email | Contraseña |
-|-----|-------|------------|
-| **Administrador (Web)** | `admin@talentoplusadmin.com` | `Admin123!` |
-| **Empleado (API)** | Registrarse en `/api/employees/register` | Generada y enviada por email |
+| Role | Email | Password |
+|-----|-------|----------|
+| **Administrator (Web)** | `admin@talentoplusadmin.com` | `Admin123!` |
+| **Employee (API)** | Register at `/api/employees/register` | Generated and sent by email |
 
-### 📍 URLs de Acceso
+### Access URLs
 
-| Servicio | URL Local | URL Docker |
-|----------|-----------|------------|
+| Service | Local URL | Docker URL |
+|---------|-----------|------------|
 | **Web App (Admin)** | http://localhost:5086 | http://localhost:5000 |
 | **API Swagger** | http://localhost:5001/swagger | http://localhost:5001/swagger |
 | **PostgreSQL** | localhost:5433 | localhost:5434 |
 
 ---
 
-## 📋 Tabla de Contenidos
+## Table of Contents
 
-- [Características](#características)
-- [Tecnologías](#tecnologías)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Instalación y Configuración](#instalación-y-configuración)
-- [Ejecución](#ejecución)
-- [Credenciales de Acceso](#credenciales-de-acceso)
-- [API REST](#api-rest)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Project Structure](#project-structure)
+- [Installation and Configuration](#installation-and-configuration)
+- [Execution](#execution)
+- [Access Credentials](#access-credentials)
+- [REST API](#rest-api)
 - [Docker](#docker)
 - [Tests](#tests)
-- [Funcionalidades Principales](#funcionalidades-principales)
+- [Main Features](#main-features)
 
 ---
 
-## ✨ Características
+## Features
 
-El sistema cuenta con las siguientes funcionalidades completas:
+The system includes the following complete functionalities:
 
-- ✅ **Aplicación Web MVC (Admin)** - Gestión integral de empleados y departamentos.
-- ✅ **API REST (Autoservicio)** - Endpoints para empleados con autenticación JWT.
-- ✅ **Importación Masiva** - Carga de empleados desde Excel con validación.
-- ✅ **Generación de Hoja de Vida** - Descarga de CV en PDF dinámico.
-- ✅ **Dashboard con IA** - KPIs y consultas en lenguaje natural (Gemini).
-- ✅ **Autenticación Híbrida** - Identity para Admin, JWT para Empleados.
-- ✅ **Sistema de Email** - Envío real de credenciales y notificaciones.
-- ✅ **Docker Support** - Contenedorización completa de la solución.
-- ✅ **Pruebas Automatizadas** - Tests unitarios e integración.
+- **MVC Web Application (Admin)** - Comprehensive employee and department management.
+- **REST API (Self-Service)** - Endpoints for employees with JWT authentication.
+- **Bulk Import** - Employee upload from Excel with validation.
+- **Resume Generation** - Dynamic CV download in PDF format.
+- **AI Dashboard** - KPIs and natural language queries (Gemini).
+- **Hybrid Authentication** - Identity for Admin, JWT for Employees.
+- **Email System** - Real sending of credentials and notifications.
+- **Docker Support** - Complete containerization of the solution.
+- **Automated Tests** - Unit and integration tests.
 
 ---
 
-## 🛠️ Tecnologías
+## Technologies
 
 ### Backend
-- **ASP.NET Core 8.0 MVC** - Panel Administrativo
-- **ASP.NET Core 8.0 Web API** - API REST
+- **ASP.NET Core 8.0 MVC** - Admin Panel
+- **ASP.NET Core 8.0 Web API** - REST API
 - **Entity Framework Core 8.0** - ORM
-- **PostgreSQL 16** - Base de datos
-- **ASP.NET Identity** - Auth Admin
+- **PostgreSQL 16** - Database
+- **ASP.NET Identity** - Admin Auth
 
-### Librerías y Paquetes
-- **EPPlus** - Procesamiento de Excel
-- **QuestPDF** - Generación de PDFs
-- **MailKit** - Servicio SMTP
-- **Google.GenerativeAI** - Integración con Gemini
+### Libraries and Packages
+- **EPPlus** - Excel Processing
+- **QuestPDF** - PDF Generation
+- **MailKit** - SMTP Service
+- **Google.GenerativeAI** - Gemini Integration
 - **Swashbuckle** - Swagger/OpenAPI
-- **JWT Bearer** - Seguridad API
+- **JWT Bearer** - API Security
 - **xUnit + Moq** - Testing
 
 ### DevOps
@@ -140,52 +140,52 @@ El sistema cuenta con las siguientes funcionalidades completas:
 
 ---
 
-## 📁 Estructura del Proyecto
+## Project Structure
 
 ```
 PruebaDeDesempeño/
-├── PruebaDeDesempeño.Web/              # 🌐 Aplicación MVC (Admin)
+├── PruebaDeDesempeño.Web/              # MVC Application (Admin)
 │   ├── Controllers/                     # Employees, Departments, Dashboard, Chatbot
-│   ├── Views/                           # Vistas Razor
+│   ├── Views/                           # Razor Views
 │   ├── Services/                        # Excel, PDF, Email, Gemini, EmployeeService
-│   ├── Models/                          # Entidades (Employee, Department)
+│   ├── Models/                          # Entities (Employee, Department)
 │   └── Data/                            # DbContext
 │
-├── PruebaDeDesempeño.API/              # 🔌 API REST (Empleados)
+├── PruebaDeDesempeño.API/              # REST API (Employees)
 │   ├── Controllers/                     # Auth, EmployeeSelfService, Departments
 │   └── DTOs/                            # Data Transfer Objects
 │
-├── PruebaDeDesempeño.Tests/            # 🧪 Pruebas Automatizadas
+├── PruebaDeDesempeño.Tests/            # Automated Tests
 │   ├── Services/                        # Unit Tests (EmployeeService)
 │   └── Integration/                     # Integration Tests (API)
 │
 ├── Dockerfile                           # Docker Web
 ├── Dockerfile.api                       # Docker API
-├── docker-compose.yml                   # Orquestación
-└── README.md                           # Documentación
+├── docker-compose.yml                   # Orchestration
+└── README.md                           # Documentation
 ```
 
 ---
 
-## 🔧 Instalación y Configuración
+## Installation and Configuration
 
-### Requisitos Previos
+### Prerequisites
 
 - **.NET 8.0 SDK**
 - **PostgreSQL 16**
-- **Docker Desktop** (opcional)
+- **Docker Desktop** (optional)
 
-### Pasos de Instalación
+### Installation Steps
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/srching14/TalentoPlus-S.A.S.git
    ```
 
-2. **Configurar Base de Datos**
-   Editar `appsettings.json` o usar variables de entorno.
+2. **Configure Database**
+   Edit `appsettings.json` or use environment variables.
 
-3. **Aplicar Migraciones**
+3. **Apply Migrations**
    ```bash
    cd PruebaDeDesempeño.Web
    dotnet ef database update
@@ -193,25 +193,25 @@ PruebaDeDesempeño/
 
 ---
 
-## ▶️ Ejecución
+## Execution
 
-### Opción 1: Desarrollo Local
+### Option 1: Local Development
 
 #### Web App (Admin)
 ```bash
 cd PruebaDeDesempeño.Web
 dotnet run
 ```
-Acceder a: http://localhost:5086
+Access at: http://localhost:5086
 
-#### API REST
+#### REST API
 ```bash
 cd PruebaDeDesempeño.API
 dotnet run
 ```
-Acceder a: http://localhost:5001
+Access at: http://localhost:5001
 
-### Opción 2: Docker Compose
+### Option 2: Docker Compose
 
 ```bash
 docker-compose up -d
@@ -221,67 +221,73 @@ docker-compose up -d
 
 ---
 
-## 🔌 API REST
+## REST API
 
-### Documentación Swagger
-Acceder a: **http://localhost:5001**
+### Swagger Documentation
+Access at: **http://localhost:5001**
 
-### Endpoints Principales
+### Main Endpoints
 
-#### 🔓 Públicos
-- `GET /api/departments` - Listar departamentos
-- `POST /api/employees/register` - Autoregistro de empleado
-- `POST /api/employees/login` - Login de empleado
+#### Public
+- `GET /api/departments` - List departments
+- `POST /api/employees/register` - Employee self-registration
+- `POST /api/employees/login` - Employee login
 
-#### 🔐 Privados (Bearer Token)
-- `GET /api/employees/me` - Ver mi información
-- `GET /api/employees/me/cv` - Descargar mi Hoja de Vida (PDF)
+#### Private (Bearer Token)
+- `GET /api/employees/me` - View my information
+- `GET /api/employees/me/cv` - Download my Resume (PDF)
 
 ---
 
-## 🧪 Tests
+## Tests
 
-### Ejecutar Tests
+### Run Tests
 ```bash
 cd PruebaDeDesempeño.Tests
 dotnet test
 ```
 
-### Cobertura
-- **Unit Tests**: Validan la lógica de negocio de `EmployeeService` (filtros, búsquedas, reglas).
-- **Integration Tests**: Validan los endpoints de la API y la persistencia en base de datos (in-memory).
+### Coverage
+- **Unit Tests**: Validate business logic of `EmployeeService` (filters, searches, rules).
+- **Integration Tests**: Validate API endpoints and database persistence (in-memory).
 
 ---
 
-## 🎯 Funcionalidades Principales
+## Main Features
 
-### 1. Gestión de Empleados (Web)
-- CRUD completo de empleados.
-- Asignación a departamentos.
-- Soft Delete (Inactivación).
+### 1. Employee Management (Web)
+- Complete CRUD for employees.
+- Department assignment.
+- Soft Delete (Deactivation).
 
-### 2. Importación Masiva
-- Carga de archivo Excel (`Empleados.xlsx`).
-- Validación de estructura y datos obligatorios.
-- Creación automática de usuarios.
+### 2. Bulk Import
+- Excel file upload (`Empleados.xlsx`).
+- Structure and required data validation.
+- Automatic user creation.
 
-### 3. Dashboard con IA
-- Tarjetas de métricas (Total, Vacaciones, Activos).
-- Chatbot integrado con Gemini para preguntas como:
-  - "¿Cuántos empleados hay en Tecnología?"
-  - "¿Cuál es el salario promedio?"
+### 3. AI Dashboard
+- Metrics cards (Total, On Vacation, Active).
+- Chatbot integrated with Gemini for questions like:
+  - "How many employees are in Technology?"
+  - "What is the average salary?"
 
-### 4. Autoservicio (API)
-- Los empleados pueden registrarse y recibir su contraseña por email.
-- Login seguro con JWT.
-- Descarga de Hoja de Vida en PDF autogenerado.
+### 4. Self-Service (API)
+- Employees can register and receive their password by email.
+- Secure login with JWT.
+- Auto-generated Resume download in PDF.
 
 ---
 
-## 📝 Licencia
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
+# License
 
-Desarrollado por Elias Ching – Full Stack Developer
-srching23@gmail.com
-srching14
-Barranquilla, Atlántico
+This project is open source and available under the MIT license.
+
+---
+
+**Developed by Elias Ching – Full Stack Developer**
+
+- Email: srching23@gmail.com
+- GitHub: srching14
+- Location: Barranquilla, Atlántico
+
+**Developed for TalentoPlus S.A.S.**
