@@ -10,7 +10,7 @@ namespace PruebaDeDesempeño.API.Controllers;
 /// API Controller para gestión de empleados
 /// </summary>
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/admin/employees")]
 [Authorize(AuthenticationSchemes = "Bearer")]
 public class EmployeesApiController : ControllerBase
 {
@@ -170,7 +170,7 @@ public class EmployeesApiController : ControllerBase
         }
 
         // Verificar email único (excluyendo el empleado actual)
-        if (!string.IsNullOrEmpty(dto.Email) && 
+        if (!string.IsNullOrEmpty(dto.Email) &&
             await _context.Employees.AnyAsync(e => e.Email == dto.Email && e.Id != id))
         {
             return Conflict(new { message = "Ya existe un empleado con ese email" });
@@ -189,6 +189,7 @@ public class EmployeesApiController : ControllerBase
             if (dept == null) return BadRequest(new { message = "Departamento no encontrado" });
             employee.DepartmentId = dto.DepartmentId.Value;
         }
+
         if (dto.Status.HasValue) employee.Status = dto.Status.Value;
 
         employee.UpdatedAt = DateTime.UtcNow;

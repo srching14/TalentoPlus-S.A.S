@@ -34,8 +34,9 @@ namespace PruebaDeDesempeño.Web.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     FullName = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastLoginAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastLoginAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    EmployeeId = table.Column<int>(type: "integer", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -57,46 +58,20 @@ namespace PruebaDeDesempeño.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
-                    DocumentType = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    DocumentNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Address = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    City = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
-                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Stock = table.Column<int>(type: "integer", nullable: false),
-                    Category = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    UnitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,60 +181,47 @@ namespace PruebaDeDesempeño.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sales",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SaleNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ClientId = table.Column<int>(type: "integer", nullable: false),
-                    SaleDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    IVA = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Total = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
-                    PdfReceiptPath = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    DocumentNumber = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    DocumentType = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    FullName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    Address = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Gender = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    Position = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Salary = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    HireDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    EducationLevel = table.Column<int>(type: "integer", nullable: false),
+                    ProfessionalProfile = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sales", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sales_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
+                        name: "FK_Employees_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Employees_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SaleDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SaleId = table.Column<int>(type: "integer", nullable: false),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
-                    Subtotal = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SaleDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SaleDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SaleDetails_Sales_SaleId",
-                        column: x => x.SaleId,
-                        principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -268,8 +230,33 @@ namespace PruebaDeDesempeño.Web.Migrations
                 values: new object[,]
                 {
                     { "1", null, "Administrador", "ADMINISTRADOR" },
-                    { "2", null, "Cliente", "CLIENTE" }
+                    { "2", null, "Empleado", "EMPLEADO" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "EmployeeId", "FullName", "LastLoginAt", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "admin-user-id", 0, "4c4e59ef-9ee1-4a8f-bc5c-f1cc5f3c4b3a", new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3553), "admin@talentoplusadmin.com", true, null, "Administrador TalentoPlus", null, false, null, "ADMIN@TALENTOPLUSADMIN.COM", "ADMIN@TALENTOPLUSADMIN.COM", "AQAAAAIAAYagAAAAEPfkhVCv2tQQ+oBnftrj3NtvkJMrL6sh7CJ33ieAHq3YZKl+16FKHkMe2+rxd87atw==", null, false, "8f1bb22f-08f9-40fe-91ef-780c391fe680", false, "admin@talentoplusadmin.com" });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "Id", "CreatedAt", "Description", "IsActive", "Name", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3462), "Gestión del talento humano", true, "Recursos Humanos", null },
+                    { 2, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3464), "Desarrollo y soporte tecnológico", true, "Tecnología", null },
+                    { 3, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3466), "Gestión comercial y ventas", true, "Ventas", null },
+                    { 4, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3467), "Marketing y comunicaciones", true, "Marketing", null },
+                    { 5, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3468), "Gestión financiera y contable", true, "Finanzas", null },
+                    { 6, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3469), "Operaciones y logística", true, "Operaciones", null },
+                    { 7, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3470), "Logística y distribución", true, "Logística", null },
+                    { 8, new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3471), "Contabilidad y auditoría", true, "Contabilidad", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "admin-user-id" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -309,57 +296,42 @@ namespace PruebaDeDesempeño.Web.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_DocumentNumber",
-                table: "Clients",
+                name: "IX_Departments_Name",
+                table: "Departments",
+                column: "Name");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_ApplicationUserId",
+                table: "Employees",
+                column: "ApplicationUserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_DepartmentId",
+                table: "Employees",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_DocumentNumber",
+                table: "Employees",
                 column: "DocumentNumber",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_Email",
-                table: "Clients",
+                name: "IX_Employees_Email",
+                table: "Employees",
                 column: "Email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_FullName",
-                table: "Clients",
+                name: "IX_Employees_FullName",
+                table: "Employees",
                 column: "FullName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Category",
-                table: "Products",
-                column: "Category");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_Name",
-                table: "Products",
-                column: "Name");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SaleDetails_ProductId",
-                table: "SaleDetails",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SaleDetails_SaleId",
-                table: "SaleDetails",
-                column: "SaleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sales_ClientId",
-                table: "Sales",
-                column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sales_SaleDate",
-                table: "Sales",
-                column: "SaleDate");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sales_SaleNumber",
-                table: "Sales",
-                column: "SaleNumber",
-                unique: true);
+                name: "IX_Employees_Status",
+                table: "Employees",
+                column: "Status");
         }
 
         /// <inheritdoc />
@@ -381,7 +353,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "SaleDetails");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -390,13 +362,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Sales");
-
-            migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Departments");
         }
     }
 }

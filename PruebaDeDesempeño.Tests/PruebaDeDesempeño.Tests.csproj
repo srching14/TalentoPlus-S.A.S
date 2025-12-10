@@ -24,7 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PruebaDeDesempeño.Web\PruebaDeDesempeño.Web.csproj" />
+    <ProjectReference Include="..\PruebaDeDesempeño.Web\PruebaDeDesempeño.Web.csproj">
+      <Aliases>global,WebProject</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\PruebaDeDesempeño.API\PruebaDeDesempeño.API.csproj">
+      <Aliases>ApiProject</Aliases>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

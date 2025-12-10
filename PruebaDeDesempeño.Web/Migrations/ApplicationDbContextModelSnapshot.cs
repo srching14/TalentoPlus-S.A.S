@@ -255,17 +255,17 @@ namespace PruebaDeDesempeño.Web.Migrations
                         {
                             Id = "admin-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1039599-81cb-4cb8-8627-f4e759ce7c36",
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4222),
+                            ConcurrencyStamp = "4c4e59ef-9ee1-4a8f-bc5c-f1cc5f3c4b3a",
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3553),
                             Email = "admin@talentoplusadmin.com",
                             EmailConfirmed = true,
                             FullName = "Administrador TalentoPlus",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TALENTOPLUSADMIN.COM",
                             NormalizedUserName = "ADMIN@TALENTOPLUSADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE4yJIOJus0FQ/8IbVy++L7lkJw+7y2A/p/fJtazn9XRqoj3Ap4lwfe395g3rsOX5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPfkhVCv2tQQ+oBnftrj3NtvkJMrL6sh7CJ33ieAHq3YZKl+16FKHkMe2+rxd87atw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0e4c9993-1ac1-4119-9d2b-6a540f16dd01",
+                            SecurityStamp = "8f1bb22f-08f9-40fe-91ef-780c391fe680",
                             TwoFactorEnabled = false,
                             UserName = "admin@talentoplusadmin.com"
                         });
@@ -307,7 +307,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4138),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3462),
                             Description = "Gestión del talento humano",
                             IsActive = true,
                             Name = "Recursos Humanos"
@@ -315,7 +315,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4140),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3464),
                             Description = "Desarrollo y soporte tecnológico",
                             IsActive = true,
                             Name = "Tecnología"
@@ -323,7 +323,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4141),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3466),
                             Description = "Gestión comercial y ventas",
                             IsActive = true,
                             Name = "Ventas"
@@ -331,7 +331,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4142),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3467),
                             Description = "Marketing y comunicaciones",
                             IsActive = true,
                             Name = "Marketing"
@@ -339,7 +339,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4143),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3468),
                             Description = "Gestión financiera y contable",
                             IsActive = true,
                             Name = "Finanzas"
@@ -347,7 +347,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4144),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3469),
                             Description = "Operaciones y logística",
                             IsActive = true,
                             Name = "Operaciones"
@@ -355,7 +355,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4145),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3470),
                             Description = "Logística y distribución",
                             IsActive = true,
                             Name = "Logística"
@@ -363,7 +363,7 @@ namespace PruebaDeDesempeño.Web.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 12, 9, 21, 47, 40, 729, DateTimeKind.Utc).AddTicks(4146),
+                            CreatedAt = new DateTime(2025, 12, 10, 0, 40, 36, 856, DateTimeKind.Utc).AddTicks(3471),
                             Description = "Contabilidad y auditoría",
                             IsActive = true,
                             Name = "Contabilidad"

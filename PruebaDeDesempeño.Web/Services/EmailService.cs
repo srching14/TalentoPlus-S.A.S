@@ -43,7 +43,7 @@ public class EmailService : IEmailService
 <body>
     <div class=""container"">
         <div class=""header"">
-            <h1>🎉 ¡Bienvenido!</h1>
+            <h1>¡Bienvenido!</h1>
         </div>
         <div class=""content"">
             <h2>Hola {fullName},</h2>
@@ -56,11 +56,11 @@ public class EmailService : IEmailService
             
             <p>Con tu cuenta podrás:</p>
             <ul>
-                <li>✅ Gestionar productos y stock</li>
-                <li>✅ Administrar clientes</li>
-                <li>✅ Realizar y consultar ventas</li>
-                <li>✅ Generar reportes y estadísticas</li>
-                <li>✅ Usar nuestro asistente virtual con IA</li>
+                <li>Gestionar productos y stock</li>
+                <li>Administrar clientes</li>
+                <li>Realizar y consultar ventas</li>
+                <li>Generar reportes y estadísticas</li>
+                <li>Usar nuestro asistente virtual con IA</li>
             </ul>
             
             <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
@@ -102,7 +102,7 @@ public class EmailService : IEmailService
             message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
-            await client.ConnectAsync(smtpServer, smtpPort, MailKit.Security.SecureSocketOptions.StartTls);
+            await client.ConnectAsync(smtpServer, smtpPort, MailKit.Security.SecureSocketOptions.Auto);
             await client.AuthenticateAsync(username, password);
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
