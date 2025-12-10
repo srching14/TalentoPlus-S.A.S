@@ -281,4 +281,7 @@ dotnet test
 ## 📝 Licencia
 Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
-**Desarrollado para TalentoPlus S.A.S.**
+Desarrollado por Elias Ching – Full Stack Developer
+srching23@gmail.com
+srching14
+Barranquilla, Atlántico
